@@ -1,0 +1,29 @@
+# Naruto Battle Simulator - Python Dependencies
+
+pygame
+numpy
+matplotlib
+
+
+# AI / Search
+# Minimax and Alpha-Beta are implemented using Python
+# No external AI library is required
+
+
+# Minimum User Environment:
+
+# OS: Windows 10/11, Linux, or macOS
+# Python: 3.10 or newer
+# RAM: 4 GB minimum
+# CPU: Dual-core processor or better
+# GPU: Not required
+# Storage: ~500 MB free space
+# Display: 1280x720 or higher recommended
+
+
+# Development Environment:
+
+# IDE: Visual Studio Code
+# Development GPU: NVIDIA RTX 3060 12 GB
+# Development RAM: 16GB RAM 
+# Development CPU: Intel I5 Dual-core
