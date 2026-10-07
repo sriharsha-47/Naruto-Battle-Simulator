@@ -550,7 +550,8 @@ We start **small**.
 
 ```mermaid
 flowchart LR
-    N[" Naruto"] --> B[" Battle Engine"] <-- S[" Sasuke"]
+    N[" Naruto"] --> B[" Battle Engine"]
+    S[" Sasuke"] --> B
 
     B --> A[" 3–4 Actions"]
     B --> HP[" HP"]
