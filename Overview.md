@@ -10,7 +10,7 @@
 
 ```mermaid
 flowchart LR
-    A[" Human Player"] --> B["⚔️ Battle Engine"]
+    A[" Human Player"] --> B[" Battle Engine"]
     C[" AI Player"] --> B
 
     B --> D[" Battle State"]
