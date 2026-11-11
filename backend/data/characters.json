@@ -1,0 +1,759 @@
+[
+  {
+    "id": "naruto",
+    "name": "Naruto Uzumaki",
+    "title": "Hero of the Hidden Leaf",
+    "description": "Jinchuriki of the Nine-Tails with immense stamina and willpower.",
+    "avatar_url": "/avatars/naruto.png",
+    "max_hp": 250,
+    "hp": 250,
+    "max_chakra": 120,
+    "chakra": 120,
+    "attack": 48,
+    "defense": 45,
+    "speed": 48,
+    "abilities": [
+      {
+        "id": "rasengan",
+        "name": "Rasengan",
+        "description": "A spinning sphere of chakra concentrated into the palm.",
+        "damage": 45,
+        "heal": 0,
+        "chakra_cost": 30,
+        "cooldown_turns": 2,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "shadow_clone",
+        "name": "Shadow Clone Jutsu",
+        "description": "Creates solid clones to overwhelm the opponent, increasing attack power.",
+        "damage": 0,
+        "heal": 0,
+        "chakra_cost": 25,
+        "cooldown_turns": 3,
+        "effect_type": "buff",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Shadow Clone Synergy",
+          "effect_type": "buff_attack",
+          "value": 15,
+          "duration": 3
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "sage_mode",
+        "name": "Sage Mode",
+        "description": "Channels natural energy to heal wounds and enhance defensive fortitude.",
+        "damage": 0,
+        "heal": 35,
+        "chakra_cost": 40,
+        "cooldown_turns": 4,
+        "effect_type": "buff",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Sage Fortitude",
+          "effect_type": "buff_defense",
+          "value": 12,
+          "duration": 3
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "rasenshuriken",
+        "name": "Wind Style: Rasenshuriken",
+        "description": "A devastating vortex of microscopic wind blades tearing through the enemy.",
+        "damage": 90,
+        "heal": 0,
+        "chakra_cost": 65,
+        "cooldown_turns": 5,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": true
+      }
+    ]
+  },
+  {
+    "id": "sasuke",
+    "name": "Sasuke Uchiha",
+    "title": "Avenger of the Uchiha",
+    "description": "A prodigy wielding deadly lightning jutsu and the legendary Sharingan.",
+    "avatar_url": "/avatars/sasuke.png",
+    "max_hp": 210,
+    "hp": 210,
+    "max_chakra": 110,
+    "chakra": 110,
+    "attack": 55,
+    "defense": 40,
+    "speed": 56,
+    "abilities": [
+      {
+        "id": "chidori",
+        "name": "Chidori",
+        "description": "Chakra concentrated into lightning piercing through the enemy.",
+        "damage": 50,
+        "heal": 0,
+        "chakra_cost": 30,
+        "cooldown_turns": 2,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "fireball_jutsu",
+        "name": "Fireball Jutsu",
+        "description": "Exhales a sphere of flame dealing initial damage and burning over time.",
+        "damage": 35,
+        "heal": 0,
+        "chakra_cost": 25,
+        "cooldown_turns": 2,
+        "effect_type": "dot",
+        "target_type": "opponent",
+        "status_effect": {
+          "name": "Scorched",
+          "effect_type": "burn",
+          "value": 10,
+          "duration": 2
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "sharingan",
+        "name": "Sharingan Insight",
+        "description": "Anticipates opponent moves, sharpening offensive strike capability.",
+        "damage": 0,
+        "heal": 0,
+        "chakra_cost": 25,
+        "cooldown_turns": 3,
+        "effect_type": "buff",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Predictive Vision",
+          "effect_type": "buff_attack",
+          "value": 14,
+          "duration": 2
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "kirin",
+        "name": "Kirin",
+        "description": "Commands natural thunderbolts to strike down the foe in an instant.",
+        "damage": 95,
+        "heal": 0,
+        "chakra_cost": 70,
+        "cooldown_turns": 5,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": true
+      }
+    ]
+  },
+  {
+    "id": "sakura",
+    "name": "Sakura Haruno",
+    "title": "Medical Master",
+    "description": "Trained by Lady Tsunade with extraordinary chakra control and monstrous strength.",
+    "avatar_url": "/avatars/sakura.png",
+    "max_hp": 220,
+    "hp": 220,
+    "max_chakra": 130,
+    "chakra": 130,
+    "attack": 42,
+    "defense": 44,
+    "speed": 44,
+    "abilities": [
+      {
+        "id": "cherry_blossom_impact",
+        "name": "Cherry Blossom Impact",
+        "description": "Pours concentrated chakra into a punch that shatters earth and bones.",
+        "damage": 42,
+        "heal": 0,
+        "chakra_cost": 25,
+        "cooldown_turns": 2,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "healing_jutsu",
+        "name": "Mystical Palm Healing",
+        "description": "Focuses medical ninjutsu to restore vital energy and heal injuries.",
+        "damage": 0,
+        "heal": 50,
+        "chakra_cost": 30,
+        "cooldown_turns": 2,
+        "effect_type": "heal",
+        "target_type": "self",
+        "is_ultimate": false
+      },
+      {
+        "id": "strength_of_a_hundred",
+        "name": "Strength of a Hundred",
+        "description": "Releases stored chakra to heal wounds and massively boost strike power.",
+        "damage": 0,
+        "heal": 25,
+        "chakra_cost": 45,
+        "cooldown_turns": 4,
+        "effect_type": "buff",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Mitotic Amplification",
+          "effect_type": "buff_attack",
+          "value": 18,
+          "duration": 3
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "katsuyu_healing",
+        "name": "Summoning: Katsuyu Sanctuary",
+        "description": "Summons slugs that heavily restore health and grant an enduring shield.",
+        "damage": 0,
+        "heal": 85,
+        "chakra_cost": 60,
+        "cooldown_turns": 5,
+        "effect_type": "heal",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Katsuyu Shell",
+          "effect_type": "shield",
+          "value": 30,
+          "duration": 2
+        },
+        "is_ultimate": true
+      }
+    ]
+  },
+  {
+    "id": "kakashi",
+    "name": "Kakashi Hatake",
+    "title": "Copy Ninja",
+    "description": "Former ANBU captain proficient with over a thousand jutsu and keen tactics.",
+    "avatar_url": "/avatars/kakashi.png",
+    "max_hp": 215,
+    "hp": 215,
+    "max_chakra": 115,
+    "chakra": 115,
+    "attack": 50,
+    "defense": 48,
+    "speed": 52,
+    "abilities": [
+      {
+        "id": "lightning_blade",
+        "name": "Lightning Blade (Raikiri)",
+        "description": "A refined, thrusting lightning blade capable of cutting lightning itself.",
+        "damage": 52,
+        "heal": 0,
+        "chakra_cost": 32,
+        "cooldown_turns": 2,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "copy_jutsu",
+        "name": "Water Dragon Copy",
+        "description": "Instantly replicates water dragon jutsu to strike the opponent.",
+        "damage": 36,
+        "heal": 0,
+        "chakra_cost": 20,
+        "cooldown_turns": 1,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "sharingan_defense",
+        "name": "Sharingan Precognition",
+        "description": "Reads opponent movement vectors, increasing defensive positioning.",
+        "damage": 0,
+        "heal": 0,
+        "chakra_cost": 25,
+        "cooldown_turns": 3,
+        "effect_type": "buff",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Evasion Stance",
+          "effect_type": "buff_defense",
+          "value": 15,
+          "duration": 3
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "kamui",
+        "name": "Kamui",
+        "description": "Warps space-time around target, dealing catastrophic damage and stunning.",
+        "damage": 85,
+        "heal": 0,
+        "chakra_cost": 70,
+        "cooldown_turns": 5,
+        "effect_type": "stun",
+        "target_type": "opponent",
+        "status_effect": {
+          "name": "Dimensional Distortion",
+          "effect_type": "stun",
+          "value": 1,
+          "duration": 1
+        },
+        "is_ultimate": true
+      }
+    ]
+  },
+  {
+    "id": "itachi",
+    "name": "Itachi Uchiha",
+    "title": "Shadow of the Leaf",
+    "description": "Master of Genjutsu and the Mangekyo Sharingan with lethal precision.",
+    "avatar_url": "/avatars/itachi.png",
+    "max_hp": 195,
+    "hp": 195,
+    "max_chakra": 120,
+    "chakra": 120,
+    "attack": 56,
+    "defense": 42,
+    "speed": 54,
+    "abilities": [
+      {
+        "id": "amaterasu",
+        "name": "Amaterasu",
+        "description": "Black inextinguishable flames that continually incinerate the target.",
+        "damage": 40,
+        "heal": 0,
+        "chakra_cost": 40,
+        "cooldown_turns": 3,
+        "effect_type": "dot",
+        "target_type": "opponent",
+        "status_effect": {
+          "name": "Black Flames",
+          "effect_type": "burn",
+          "value": 15,
+          "duration": 3
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "tsukuyomi",
+        "name": "Tsukuyomi",
+        "description": "Traps the target in mental torture, breaking their focus and stunning them.",
+        "damage": 32,
+        "heal": 0,
+        "chakra_cost": 45,
+        "cooldown_turns": 4,
+        "effect_type": "stun",
+        "target_type": "opponent",
+        "status_effect": {
+          "name": "Nightmare Stun",
+          "effect_type": "stun",
+          "value": 1,
+          "duration": 1
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "susanoo_shield",
+        "name": "Susanoo Ribcage",
+        "description": "Erects spectral skeletal armor to shield against heavy assaults.",
+        "damage": 0,
+        "heal": 0,
+        "chakra_cost": 35,
+        "cooldown_turns": 3,
+        "effect_type": "shield",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Susanoo Armor",
+          "effect_type": "shield",
+          "value": 45,
+          "duration": 2
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "totsuka_blade",
+        "name": "Totsuka Blade",
+        "description": "Ethereal spirit sword that cuts and seals away the target's essence.",
+        "damage": 100,
+        "heal": 0,
+        "chakra_cost": 75,
+        "cooldown_turns": 6,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": true
+      }
+    ]
+  },
+  {
+    "id": "gaara",
+    "name": "Gaara",
+    "title": "Fifth Kazekage",
+    "description": "Master of sand manipulation protected by an impenetrable automatic defense.",
+    "avatar_url": "/avatars/gaara.png",
+    "max_hp": 230,
+    "hp": 230,
+    "max_chakra": 110,
+    "chakra": 110,
+    "attack": 44,
+    "defense": 62,
+    "speed": 40,
+    "abilities": [
+      {
+        "id": "sand_burial",
+        "name": "Sand Burial",
+        "description": "Crushes the opponent under immense pressurized sand.",
+        "damage": 42,
+        "heal": 0,
+        "chakra_cost": 28,
+        "cooldown_turns": 2,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "sand_shield",
+        "name": "Shield of Sand",
+        "description": "Dense wall of sand surrounds Gaara, absorbing damage and raising defense.",
+        "damage": 0,
+        "heal": 0,
+        "chakra_cost": 35,
+        "cooldown_turns": 3,
+        "effect_type": "shield",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Sand Barrier",
+          "effect_type": "shield",
+          "value": 50,
+          "duration": 3
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "desert_coffin",
+        "name": "Desert Coffin",
+        "description": "Encases the opponent in sand, immobilizing and stunning them.",
+        "damage": 30,
+        "heal": 0,
+        "chakra_cost": 35,
+        "cooldown_turns": 3,
+        "effect_type": "stun",
+        "target_type": "opponent",
+        "status_effect": {
+          "name": "Sand Bound",
+          "effect_type": "stun",
+          "value": 1,
+          "duration": 1
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "sand_tsunami",
+        "name": "Sand Tsunami",
+        "description": "Massive ocean of crashing sand sweeping over the battlefield and shredding defense.",
+        "damage": 85,
+        "heal": 0,
+        "chakra_cost": 65,
+        "cooldown_turns": 5,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "status_effect": {
+          "name": "Armor Crushed",
+          "effect_type": "debuff_defense",
+          "value": 15,
+          "duration": 2
+        },
+        "is_ultimate": true
+      }
+    ]
+  },
+  {
+    "id": "rock_lee",
+    "name": "Rock Lee",
+    "title": "Green Beast of Prey",
+    "description": "Pure Taijutsu genius capable of unleashing explosive physical speed and power without chakra.",
+    "avatar_url": "/avatars/rock_lee.png",
+    "max_hp": 240,
+    "hp": 240,
+    "max_chakra": 0,
+    "chakra": 0,
+    "attack": 54,
+    "defense": 42,
+    "speed": 65,
+    "abilities": [
+      {
+        "id": "leaf_hurricane",
+        "name": "Leaf Hurricane",
+        "description": "A rapid spin kick aimed high then low.",
+        "damage": 36,
+        "heal": 0,
+        "chakra_cost": 0,
+        "cooldown_turns": 1,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "primary_lotus",
+        "name": "Primary Lotus",
+        "description": "Wraps the airborne opponent and piles them into the ground with high speed.",
+        "damage": 52,
+        "heal": 0,
+        "chakra_cost": 0,
+        "cooldown_turns": 3,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "hidden_lotus",
+        "name": "Hidden Lotus",
+        "description": "Flies across the air striking from all angles before a finishing blow.",
+        "damage": 68,
+        "heal": 0,
+        "chakra_cost": 0,
+        "cooldown_turns": 4,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "eight_gates",
+        "name": "Eight Inner Gates: Gate of Life",
+        "description": "Removes the body's natural limiters to deliver an all-out destructive blow.",
+        "damage": 105,
+        "heal": 0,
+        "chakra_cost": 0,
+        "cooldown_turns": 6,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "self_damage": 25,
+        "is_ultimate": true
+      }
+    ]
+  },
+  {
+    "id": "neji",
+    "name": "Neji Hyuga",
+    "title": "Byakugan Prodigy",
+    "description": "Master of the Gentle Fist who sees chakra pathways and seals tenketsu points.",
+    "avatar_url": "/avatars/neji.png",
+    "max_hp": 215,
+    "hp": 215,
+    "max_chakra": 115,
+    "chakra": 115,
+    "attack": 52,
+    "defense": 46,
+    "speed": 50,
+    "abilities": [
+      {
+        "id": "gentle_fist",
+        "name": "Gentle Fist Strike",
+        "description": "Injects chakra into opponent's chakra network, dealing damage and draining chakra.",
+        "damage": 36,
+        "heal": 0,
+        "chakra_cost": 20,
+        "cooldown_turns": 2,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "chakra_drain": 20,
+        "is_ultimate": false
+      },
+      {
+        "id": "eight_trigrams_64_palms",
+        "name": "Eight Trigrams 64 Palms",
+        "description": "Rapid barrage of strikes sealing chakra network and draining significant chakra.",
+        "damage": 55,
+        "heal": 0,
+        "chakra_cost": 35,
+        "cooldown_turns": 3,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "chakra_drain": 35,
+        "is_ultimate": false
+      },
+      {
+        "id": "rotation",
+        "name": "Eight Trigrams Palms Revolving Heaven",
+        "description": "Spins rapidly releasing chakra to deflect incoming attacks with a shield.",
+        "damage": 0,
+        "heal": 0,
+        "chakra_cost": 25,
+        "cooldown_turns": 2,
+        "effect_type": "shield",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Revolving Shield",
+          "effect_type": "shield",
+          "value": 45,
+          "duration": 2
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "air_palm",
+        "name": "Eight Trigrams Vacuum Palm",
+        "description": "Emits a high-speed wave of compressed chakra that slams the opponent backwards.",
+        "damage": 82,
+        "heal": 0,
+        "chakra_cost": 60,
+        "cooldown_turns": 5,
+        "effect_type": "stun",
+        "target_type": "opponent",
+        "status_effect": {
+          "name": "Stunned Airshock",
+          "effect_type": "stun",
+          "value": 1,
+          "duration": 1
+        },
+        "is_ultimate": true
+      }
+    ]
+  },
+  {
+    "id": "madara",
+    "name": "Madara Uchiha",
+    "title": "Ghost of the Uchiha",
+    "description": "Legendary patriarch of the Uchiha clan with godlike combat prowess and terrifying power.",
+    "avatar_url": "/avatars/madara.png",
+    "max_hp": 235,
+    "hp": 235,
+    "max_chakra": 125,
+    "chakra": 125,
+    "attack": 55,
+    "defense": 50,
+    "speed": 51,
+    "abilities": [
+      {
+        "id": "fire_style_majestic",
+        "name": "Fire Style: Majestic Destroyer Flame",
+        "description": "A sea of searing flames that burns the entire enemy field.",
+        "damage": 52,
+        "heal": 0,
+        "chakra_cost": 35,
+        "cooldown_turns": 2,
+        "effect_type": "dot",
+        "target_type": "opponent",
+        "status_effect": {
+          "name": "Inferno Burn",
+          "effect_type": "burn",
+          "value": 12,
+          "duration": 2
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "susanoo_full",
+        "name": "Susanoo Clad",
+        "description": "Armors in majestic Susanoo aura, providing substantial shield and bonus attack.",
+        "damage": 0,
+        "heal": 0,
+        "chakra_cost": 45,
+        "cooldown_turns": 3,
+        "effect_type": "shield",
+        "target_type": "self",
+        "status_effect": {
+          "name": "Susanoo Fortification",
+          "effect_type": "shield",
+          "value": 55,
+          "duration": 2
+        },
+        "is_ultimate": false
+      },
+      {
+        "id": "rinne_rebirth",
+        "name": "Wood Style Healing",
+        "description": "Integrates Hashirama cells to rapidly regenerate vital essence.",
+        "damage": 0,
+        "heal": 55,
+        "chakra_cost": 50,
+        "cooldown_turns": 4,
+        "effect_type": "heal",
+        "target_type": "self",
+        "is_ultimate": false
+      },
+      {
+        "id": "infinite_tsukuyomi",
+        "name": "Tengai Shinsei (Meteor Drop)",
+        "description": "Calls forth gargantuan celestial meteors from the sky to obliterate the battlefield.",
+        "damage": 105,
+        "heal": 0,
+        "chakra_cost": 80,
+        "cooldown_turns": 6,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": true
+      }
+    ]
+  },
+  {
+    "id": "minato",
+    "name": "Minato Namikaze",
+    "title": "Yellow Flash of the Leaf",
+    "description": "The Fourth Hokage renowned across all nations for unrivaled instantaneous speed.",
+    "avatar_url": "/avatars/minato.png",
+    "max_hp": 205,
+    "hp": 205,
+    "max_chakra": 115,
+    "chakra": 115,
+    "attack": 52,
+    "defense": 44,
+    "speed": 68,
+    "abilities": [
+      {
+        "id": "flying_raijin",
+        "name": "Flying Thunder God Level 2",
+        "description": "Teleports instantaneously above opponent to deliver a lethal blitz attack.",
+        "damage": 50,
+        "heal": 0,
+        "chakra_cost": 28,
+        "cooldown_turns": 2,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "minato_rasengan",
+        "name": "Spiraling Sphere",
+        "description": "Minato's original creation, compressed chakra striking with immense force.",
+        "damage": 46,
+        "heal": 0,
+        "chakra_cost": 28,
+        "cooldown_turns": 2,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "kunai_barrage",
+        "name": "Special Kunai Barrage",
+        "description": "Hurls formula marked kunai with pinpoint precision.",
+        "damage": 38,
+        "heal": 0,
+        "chakra_cost": 20,
+        "cooldown_turns": 1,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "is_ultimate": false
+      },
+      {
+        "id": "space_time_barrier",
+        "name": "Space-Time Barrier",
+        "description": "Distorts space to deflect all attack energy back at the foe while shielding self.",
+        "damage": 88,
+        "heal": 0,
+        "chakra_cost": 65,
+        "cooldown_turns": 5,
+        "effect_type": "damage",
+        "target_type": "opponent",
+        "status_effect": {
+          "name": "Guiding Thunder Barrier",
+          "effect_type": "shield",
+          "value": 30,
+          "duration": 2
+        },
+        "is_ultimate": true
+      }
+    ]
+  }
+]

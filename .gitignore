@@ -1,6 +1,11 @@
 # Python
 __pycache__/
 *.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
 
 # Virtual environments
 .venv/
@@ -19,3 +24,23 @@ Thumbs.db
 
 # Log files
 *.log
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.idea/
+*.swp
+*.swo
