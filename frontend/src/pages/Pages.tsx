@@ -1071,7 +1071,7 @@ export const AnalyticsPage: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    api.getAIComparison().then(setData);
+    api.getAIComparison().then((res: any) => setData(Array.isArray(res) ? res : []));
   }, []);
 
   return (

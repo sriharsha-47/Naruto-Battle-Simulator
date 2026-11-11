@@ -5,7 +5,7 @@ import { TournamentState } from '../types/tournament';
 import { CHARACTERS } from './mockData';
 import { computeAIDecision, executeBattleAction, generateInteractiveGameTree } from '../utils/aiEngine';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_BASE_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
 
 // In-memory local stores for fallback / offline simulation
 const localBattles: Record<string, BattleState> = {};
