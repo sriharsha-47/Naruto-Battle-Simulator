@@ -3,6 +3,8 @@
 pygame
 numpy
 matplotlib
+pytest
+pandas
 
 
 # AI / Search
