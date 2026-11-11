@@ -26,6 +26,6 @@ pandas
 # Development Environment:
 
 # IDE: Visual Studio Code
-# Development GPU: NVIDIA RTX 3060 12 GB
+# Development GPU: NVIDIA RTX 4050  6GB
 # Development RAM: 16GB RAM 
 # Development CPU: Intel I5 Dual-core
