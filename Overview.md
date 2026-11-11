@@ -661,7 +661,7 @@ The experiments make it an **AI project rather than just a game**.
 - [x] AI approach planned
 - [x] Initial scope defined
 - [x] Development pipeline defined
-- [ ] GitHub repository initialized
+- [x] GitHub repository initialized
 - [ ] Battle engine
 - [ ] Character system
 - [ ] Ability system
