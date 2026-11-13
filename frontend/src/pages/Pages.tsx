@@ -32,7 +32,7 @@ import { useBattleStore } from '../store/useBattleStore';
 import { useSettingsStore } from '../store/useSettingsStore';
 import { useTournamentStore } from '../store/useTournamentStore';
 import { sound } from '../utils/sound';
-import { computeAIDecision, generateGameTree, hasUnlimitedChakra } from '../utils/aiEngine';
+import { computeAIDecision, generateGameTree, hasUnlimitedChakra, getHealsLeft, MAX_HEAL_USES } from '../utils/aiEngine';
 import { BenchmarkResult, ALL_STRATEGIES, runBenchmark, runAllBenchmarks, loadBenchmarks, saveBenchmark } from '../utils/benchmark';
 
 /* =========================================================================
@@ -511,6 +511,9 @@ export const BattleArenaPage: React.FC = () => {
               <span>DEF: {p1.character.stats.defense}</span>
               <span>SPD: {p1.character.stats.speed}</span>
             </div>
+            <div className="mt-2 text-[11px] font-mono text-vitality-green/80">
+              💚 Heals left: {getHealsLeft(p1)}/{MAX_HEAL_USES}
+            </div>
           </div>
         </div>
 
@@ -560,6 +563,9 @@ export const BattleArenaPage: React.FC = () => {
               <span>ATK: {p2.character.stats.attack}</span>
               <span>DEF: {p2.character.stats.defense}</span>
               <span>SPD: {p2.character.stats.speed}</span>
+            </div>
+            <div className="mt-2 text-right text-[11px] font-mono text-vitality-green/80">
+              💚 Heals left: {getHealsLeft(p2)}/{MAX_HEAL_USES}
             </div>
           </div>
         </div>

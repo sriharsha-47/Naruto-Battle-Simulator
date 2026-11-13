@@ -3,7 +3,7 @@ import { BattleState } from '../../types/battle';
 import { AbilityButton } from './AbilityButton';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import { Brain, Swords, Zap } from 'lucide-react';
-import { hasUnlimitedChakra, mustMeditate, MEDITATE_ABILITY } from '../../utils/aiEngine';
+import { hasUnlimitedChakra, mustMeditate, MEDITATE_ABILITY, getHealsLeft } from '../../utils/aiEngine';
 
 interface ActionPanelProps {
   battle: BattleState;
@@ -86,6 +86,7 @@ export const ActionPanel: React.FC<ActionPanelProps> = ({
                 cooldownTurnsRemaining={cd}
                 disabled={isAIMove || battle.status !== 'ongoing'}
                 unlimitedChakra={unlimited}
+                healsLeft={getHealsLeft(currentFighter)}
                 onClick={() => onExecuteAbility(currentActorKey, ability.id)}
               />
             );

@@ -43,7 +43,7 @@ export const CharacterVisual: React.FC<CharacterVisualProps> = ({
       }}
     >
       {/* Kanji Watermark background */}
-      <span className="absolute inset-0 flex items-center justify-center font-display font-black text-black/25 text-[110%] pointer-events-none select-none">
+      <span className={`absolute inset-0 flex items-center justify-center font-display font-black text-black/25 text-[110%] pointer-events-none select-none ${isFlipped ? '-scale-x-100' : ''}`}>
         {character.kanji}
       </span>
 
@@ -53,7 +53,9 @@ export const CharacterVisual: React.FC<CharacterVisualProps> = ({
       </span>
 
       {/* Chakra Nature Badge */}
-      <div className="absolute bottom-1 right-1 rounded-md bg-black/60 px-1.5 py-0.5 text-[9px] font-mono font-bold tracking-wider text-white backdrop-blur-sm">
+      {/* When the card is mirrored (right-side fighter) the badge is flipped back so the text reads normally,
+          and anchored left so it still lands in the bottom-right corner on screen. */}
+      <div className={`absolute bottom-1 rounded-md bg-black/60 px-1.5 py-0.5 text-[9px] font-mono font-bold tracking-wider text-white backdrop-blur-sm ${isFlipped ? 'left-1 -scale-x-100' : 'right-1'}`}>
         {character.chakraNature}
       </div>
     </div>

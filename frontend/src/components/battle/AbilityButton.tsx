@@ -2,7 +2,7 @@ import React from 'react';
 import { Ability } from '../../types/character';
 import { sound } from '../../utils/sound';
 import { Zap, Clock, Sparkles, Shield, Heart, Flame } from 'lucide-react';
-import { getChakraRestore, MEDITATE_ABILITY_ID } from '../../utils/aiEngine';
+import { getChakraRestore, MEDITATE_ABILITY_ID, MAX_HEAL_USES } from '../../utils/aiEngine';
 
 interface AbilityButtonProps {
   ability: Ability;
@@ -10,6 +10,7 @@ interface AbilityButtonProps {
   cooldownTurnsRemaining: number;
   disabled?: boolean;
   unlimitedChakra?: boolean; // Training Dojo
+  healsLeft?: number; // remaining healing casts for this fighter
   onClick: () => void;
 }
 
@@ -19,12 +20,14 @@ export const AbilityButton: React.FC<AbilityButtonProps> = ({
   cooldownTurnsRemaining,
   disabled = false,
   unlimitedChakra = false,
+  healsLeft = MAX_HEAL_USES,
   onClick,
 }) => {
   const isOutOfChakra = !unlimitedChakra && currentChakra < ability.chakraCost;
   const chakraRestore = unlimitedChakra ? 0 : getChakraRestore(ability);
   const isOnCooldown = cooldownTurnsRemaining > 0;
-  const isUsable = !disabled && !isOutOfChakra && !isOnCooldown;
+  const isHealLimitReached = !!ability.heal && healsLeft <= 0;
+  const isUsable = !disabled && !isOutOfChakra && !isOnCooldown && !isHealLimitReached;
 
   const handleClick = () => {
     if (isUsable) {
@@ -102,6 +105,11 @@ export const AbilityButton: React.FC<AbilityButtonProps> = ({
         {ability.heal && (
           <span className="text-vitality-green font-bold">💚 +{ability.heal} HP</span>
         )}
+        {ability.heal && (
+          <span className={`font-bold ${isHealLimitReached ? 'text-red-400' : 'text-gray-400'}`}>
+            {isHealLimitReached ? 'Heal limit reached' : `(${healsLeft}/${MAX_HEAL_USES} heals left)`}
+          </span>
+        )}
         {ability.shield && (
           <span className="text-blue-400 font-bold">🛡 +{ability.shield} DEF</span>
         )}
@@ -111,7 +119,7 @@ export const AbilityButton: React.FC<AbilityButtonProps> = ({
         {ability.criticalChance && (
           <span className="text-amber-400 font-bold">💥 {Math.round(ability.criticalChance * 100)}% Crit</span>
         )}
-        {isOutOfChakra && !isOnCooldown && (
+        {isOutOfChakra && !isOnCooldown && !isHealLimitReached && (
           <span className="ml-auto text-red-400 font-bold">Low Chakra</span>
         )}
       </div>

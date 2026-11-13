@@ -12,6 +12,21 @@ export function hasUnlimitedChakra(battle: Pick<BattleState, 'mode'>): boolean {
   return battle.mode === 'practice';
 }
 
+// ---------------------------------------------------------------------------
+// Healing limit
+// ---------------------------------------------------------------------------
+// Every fighter may cast HP-restoring moves only MAX_HEAL_USES times per battle.
+// Without this, two strong healers could out-heal each other forever.
+export const MAX_HEAL_USES = 5;
+
+export function isHealingMove(ability: Ability): boolean {
+  return !!ability.heal && ability.heal > 0;
+}
+
+export function getHealsLeft(fighter: Pick<BattleFighter, 'healsUsed'>): number {
+  return Math.max(0, MAX_HEAL_USES - (fighter.healsUsed || 0));
+}
+
 // Heal / shield moves restore chakra. An explicit `chakraRestore` on the ability wins;
 // otherwise 60% of the move's own cost (clamped to 40-100) is returned.
 export function getChakraRestore(ability: Ability): number {
@@ -42,7 +57,8 @@ export function getLegalAbilities(fighter: BattleFighter, unlimitedChakra = fals
   return fighter.character.abilities.filter((ability) => {
     const cd = fighter.cooldowns[ability.id] || 0;
     const hasChakra = unlimitedChakra || fighter.currentChakra >= ability.chakraCost;
-    return cd === 0 && hasChakra;
+    const healAllowed = !isHealingMove(ability) || getHealsLeft(fighter) > 0;
+    return cd === 0 && hasChakra && healAllowed;
   });
 }
 
@@ -260,6 +276,7 @@ export function executeBattleAction(
 
   if (ability.heal) {
     healDone = ability.heal;
+    actor.healsUsed = (actor.healsUsed || 0) + 1;
     actor.currentHp = Math.min(actor.maxHp, actor.currentHp + healDone);
     popupEvent = {
       id: `popup-${Date.now()}-${Math.random()}`,
@@ -340,7 +357,7 @@ export function executeBattleAction(
         ? `${actor.character.name} is out of usable jutsu and meditates, recovering ${chakraGained} Chakra!`
         : `${actor.character.name} meditates and steadies their breathing.`
       : ability.heal
-      ? `${actor.character.name} casts ${ability.name}, restoring ${healDone} HP!${chakraNote}`
+      ? `${actor.character.name} casts ${ability.name}, restoring ${healDone} HP!${chakraNote} (Heals left: ${getHealsLeft(actor)}/${MAX_HEAL_USES})`
       : ability.shield && !ability.damage
       ? `${actor.character.name} activates ${ability.name}, granting +${shieldDone} Shield!${chakraNote}`
       : `${actor.character.name} unleashed ${ability.name}${isCrit ? ' [CRITICAL!]' : ''} dealing ${popupEvent.amount} damage!`,

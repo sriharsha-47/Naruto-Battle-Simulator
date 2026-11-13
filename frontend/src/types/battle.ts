@@ -21,6 +21,7 @@ export interface BattleFighter {
   shield: number;
   statusEffects: StatusEffect[];
   cooldowns: Record<string, number>; // abilityId -> turns left
+  healsUsed?: number; // healing moves cast so far this battle (capped by MAX_HEAL_USES)
   isAI: boolean;
   aiStrategy?: AIStrategy;
   aiDifficulty?: AIDifficulty;
