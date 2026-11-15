@@ -102,7 +102,7 @@ export const LandingPage: React.FC = () => {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-chakra-blue/20 text-chakra-blue mb-3 group-hover:scale-110 transition-transform">
               <Cpu className="h-5 w-5" />
             </div>
-            <h4 className="font-bold text-white text-base">4 AI Decision Models</h4>
+            <h4 className="font-bold text-white text-base">7 AI Decision Models</h4>
             <p className="mt-1 text-xs text-gray-400 leading-relaxed">
               Random, Greedy, Minimax, Alpha-Beta Pruning, Expectimax, Monte Carlo Tree Search and Evolutionary decision models.
             </p>
