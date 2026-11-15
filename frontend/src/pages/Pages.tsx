@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -380,6 +380,20 @@ export const BattleArenaPage: React.FC = () => {
     setModalDismissed(false);
   }, [battle?.id]);
 
+  // Auto-scroll: whenever a new move is logged, bring the newest log entry and the
+  // pinned jutsu deck into view so the player never has to scroll down manually.
+  const arenaBottomRef = useRef<HTMLDivElement | null>(null);
+  // `turn` is used (not logs.length) because the log list is capped at 50 entries
+  const turnCount = battle?.turn ?? 0;
+  const hasLogs = (battle?.logs.length ?? 0) > 0;
+  useEffect(() => {
+    if (!hasLogs) return;
+    const t = setTimeout(() => {
+      arenaBottomRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' });
+    }, 50);
+    return () => clearTimeout(t);
+  }, [turnCount, hasLogs, battle?.id]);
+
   // FIX: show an error instead of loading forever when the battle cannot be found
   if (!isLoading && !battle && error) {
     return (
@@ -473,7 +487,7 @@ export const BattleArenaPage: React.FC = () => {
       {/* Main Two-Panel Arena Stage */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Fighter 1 (Left) */}
-        <div className="relative lg:col-span-4 flex flex-col justify-between rounded-2xl border border-flame-orange/40 bg-ninja-panel/90 p-5 shadow-2xl backdrop-blur-md">
+        <div className="relative lg:col-span-4 flex flex-col rounded-2xl border border-flame-orange/40 bg-ninja-panel/90 p-5 shadow-2xl backdrop-blur-md">
           {/* Damage popups over Player 1 */}
           <DamagePopup
             popups={damagePopups}
@@ -481,9 +495,8 @@ export const BattleArenaPage: React.FC = () => {
             onComplete={(pid) => clearPopups(pid)}
           />
 
-          {/* Top Info */}
-          <div>
-            <div className="flex items-start justify-between">
+          {/* Top Info (scrolls away) */}
+          <div className="flex items-start justify-between">
               <div>
                 <span className="text-[10px] font-mono font-bold text-flame-orange uppercase">PLAYER 1</span>
                 <h3 className="text-xl font-black text-white">{p1.character.name}</h3>
@@ -497,15 +510,18 @@ export const BattleArenaPage: React.FC = () => {
               />
             </div>
 
-            {/* Health and Chakra Bars */}
-            <div className="mt-5 space-y-3">
-              <HPBar currentHp={p1.currentHp} maxHp={p1.maxHp} shield={p1.shield} />
-              <ChakraBar currentChakra={p1.currentChakra} maxChakra={p1.maxChakra} unlimited={hasUnlimitedChakra(battle)} />
+          {/* Health and Chakra Bars: pinned to the top of the visible area while scrolling */}
+          <div className="sticky top-20 z-20 mt-5 mb-4 space-y-3 rounded-xl border border-flame-orange/40 bg-ninja-panel p-3 shadow-[0_8px_24px_rgba(0,0,0,0.55)]">
+            <div className="flex items-center justify-between text-[11px] font-mono font-bold uppercase text-flame-orange">
+              <span>{p1.character.name}</span>
+              <span className="text-gray-500">P1</span>
             </div>
+            <HPBar currentHp={p1.currentHp} maxHp={p1.maxHp} shield={p1.shield} />
+            <ChakraBar currentChakra={p1.currentChakra} maxChakra={p1.maxChakra} unlimited={hasUnlimitedChakra(battle)} />
           </div>
 
           {/* Status Effects & Vitals */}
-          <div className="mt-4 border-t border-ninja-border/60 pt-3">
+          <div className="mt-auto border-t border-ninja-border/60 pt-3">
             <div className="flex items-center justify-between text-xs font-mono text-gray-400">
               <span>ATK: {p1.character.stats.attack}</span>
               <span>DEF: {p1.character.stats.defense}</span>
@@ -523,7 +539,7 @@ export const BattleArenaPage: React.FC = () => {
         </div>
 
         {/* Fighter 2 (Right) */}
-        <div className="relative lg:col-span-4 flex flex-col justify-between rounded-2xl border border-chakra-blue/40 bg-ninja-panel/90 p-5 shadow-2xl backdrop-blur-md">
+        <div className="relative lg:col-span-4 flex flex-col rounded-2xl border border-chakra-blue/40 bg-ninja-panel/90 p-5 shadow-2xl backdrop-blur-md">
           {/* Damage popups over Player 2 */}
           <DamagePopup
             popups={damagePopups}
@@ -531,9 +547,8 @@ export const BattleArenaPage: React.FC = () => {
             onComplete={(pid) => clearPopups(pid)}
           />
 
-          {/* Top Info */}
-          <div>
-            <div className="flex items-start justify-between flex-row-reverse">
+          {/* Top Info (scrolls away) */}
+          <div className="flex items-start justify-between flex-row-reverse">
               <div className="text-right">
                 <span className="text-[10px] font-mono font-bold text-chakra-blue uppercase">
                   {p2.isAI ? `AI: ${p2.aiStrategy?.toUpperCase()}` : 'PLAYER 2'}
@@ -550,15 +565,18 @@ export const BattleArenaPage: React.FC = () => {
               />
             </div>
 
-            {/* Health and Chakra Bars */}
-            <div className="mt-5 space-y-3">
-              <HPBar currentHp={p2.currentHp} maxHp={p2.maxHp} shield={p2.shield} isFlipped />
-              <ChakraBar currentChakra={p2.currentChakra} maxChakra={p2.maxChakra} isFlipped unlimited={hasUnlimitedChakra(battle)} />
+          {/* Health and Chakra Bars: pinned to the top of the visible area while scrolling */}
+          <div className="sticky top-20 z-20 mt-5 mb-4 space-y-3 rounded-xl border border-chakra-blue/40 bg-ninja-panel p-3 shadow-[0_8px_24px_rgba(0,0,0,0.55)]">
+            <div className="flex flex-row-reverse items-center justify-between text-[11px] font-mono font-bold uppercase text-chakra-blue">
+              <span>{p2.character.name}</span>
+              <span className="text-gray-500">{p2.isAI ? 'AI' : 'P2'}</span>
             </div>
+            <HPBar currentHp={p2.currentHp} maxHp={p2.maxHp} shield={p2.shield} isFlipped />
+            <ChakraBar currentChakra={p2.currentChakra} maxChakra={p2.maxChakra} isFlipped unlimited={hasUnlimitedChakra(battle)} />
           </div>
 
           {/* Status Effects & Vitals */}
-          <div className="mt-4 border-t border-ninja-border/60 pt-3">
+          <div className="mt-auto border-t border-ninja-border/60 pt-3">
             <div className="flex items-center justify-between text-xs font-mono text-gray-400">
               <span>ATK: {p2.character.stats.attack}</span>
               <span>DEF: {p2.character.stats.defense}</span>
@@ -577,6 +595,7 @@ export const BattleArenaPage: React.FC = () => {
         isAIThinking={isAIThinking}
         onExecuteAbility={(actor, abilityId) => performAction(actor, abilityId)}
       />
+      <div ref={arenaBottomRef} aria-hidden className="h-px" />
     </div>
   );
 };
@@ -754,7 +773,7 @@ export const AILabPage: React.FC = () => {
             {isRunningSim ? 'Simulating...' : 'Run 100 Test Battles'}
           </Button>
           <Button variant="secondary" size="md" disabled={busy} onClick={runAllSimulations} className="w-full mt-3">
-            {isRunningAll ? 'Benchmarking all...' : 'Benchmark All 4 Algorithms'}
+            {isRunningAll ? 'Benchmarking all...' : `Benchmark All ${ALL_STRATEGIES.length} Algorithms`}
           </Button>
         </div>
       </div>

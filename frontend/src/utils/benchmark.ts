@@ -15,6 +15,9 @@ export const ALL_STRATEGIES: AIStrategy[] = [
   'greedy',
   'minimax',
   'alpha_beta',
+  'expectimax',
+  'mcts',
+  'evolutionary',
 ];
 
 export interface BenchmarkResult {

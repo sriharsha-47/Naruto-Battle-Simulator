@@ -3,6 +3,7 @@ import { BattleState, BattleConfig, DamagePopupEvent, BattleOutcome } from '../t
 import { AIDecision, AIStrategy } from '../types/ai';
 import { api } from '../api/client';
 import { sound } from '../utils/sound';
+import { scaleDelay } from '../utils/battleSpeed';
 import { executeBattleAction, computeAIDecision, MEDITATE_ABILITY, MEDITATE_ABILITY_ID } from '../utils/aiEngine';
 
 interface BattleStore {
@@ -45,7 +46,7 @@ export const useBattleStore = create<BattleStore>((set, get) => ({
       if (newBattle.player1.isAI && newBattle.currentTurn === 'player1') {
         setTimeout(() => {
           get().performAIMove();
-        }, 700);
+        }, scaleDelay(700));
       }
 
       return newBattle;
@@ -64,7 +65,7 @@ export const useBattleStore = create<BattleStore>((set, get) => ({
       // Resume an unfinished battle if it is the AI's turn
       const fighter = state.currentTurn === 'player1' ? state.player1 : state.player2;
       if (state.status === 'ongoing' && fighter.isAI) {
-        setTimeout(() => get().performAIMove(), 700);
+        setTimeout(() => get().performAIMove(), scaleDelay(700));
       }
     } catch (err: unknown) {
       // battle: null so the arena never keeps showing a stale, different battle
@@ -121,7 +122,7 @@ export const useBattleStore = create<BattleStore>((set, get) => ({
     if (nextBattle.status === 'ongoing' && nextFighter.isAI) {
       setTimeout(() => {
         get().performAIMove();
-      }, 750);
+      }, scaleDelay(750));
     }
   },
 
@@ -159,12 +160,12 @@ export const useBattleStore = create<BattleStore>((set, get) => ({
 
   triggerScreenShake: () => {
     set({ shakeScreen: true });
-    setTimeout(() => set({ shakeScreen: false }), 450);
+    setTimeout(() => set({ shakeScreen: false }), scaleDelay(450));
   },
 
   triggerFlash: () => {
     set({ flashScreen: true });
-    setTimeout(() => set({ flashScreen: false }), 300);
+    setTimeout(() => set({ flashScreen: false }), scaleDelay(300));
   },
 
   resetBattle: () => {

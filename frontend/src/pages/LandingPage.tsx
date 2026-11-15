@@ -104,7 +104,7 @@ export const LandingPage: React.FC = () => {
             </div>
             <h4 className="font-bold text-white text-base">4 AI Decision Models</h4>
             <p className="mt-1 text-xs text-gray-400 leading-relaxed">
-              Random, Greedy, Minimax, and Alpha-Beta Pruning decision models.
+              Random, Greedy, Minimax, Alpha-Beta Pruning, Expectimax, Monte Carlo Tree Search and Evolutionary decision models.
             </p>
           </div>
 

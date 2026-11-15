@@ -1,5 +1,7 @@
 import React from 'react';
 import { Heart, Shield } from 'lucide-react';
+import { useSettingsStore } from '../../store/useSettingsStore';
+import { scaleSeconds } from '../../utils/battleSpeed';
 
 interface HPBarProps {
   currentHp: number;
@@ -14,6 +16,7 @@ export const HPBar: React.FC<HPBarProps> = ({
   shield = 0,
   isFlipped = false,
 }) => {
+  const speed = useSettingsStore((s) => s.battleSpeed);
   const percentage = Math.max(0, Math.min(100, (currentHp / maxHp) * 100));
 
   // Determine health color gradient based on percentage
@@ -54,8 +57,8 @@ export const HPBar: React.FC<HPBarProps> = ({
 
         {/* Dynamic HP bar */}
         <div
-          className={`h-full rounded-full bg-gradient-to-r ${getGradient()} transition-all duration-500 ease-out shadow-[0_0_12px_rgba(34,197,94,0.3)]`}
-          style={{ width: `${percentage}%` }}
+          className={`h-full rounded-full bg-gradient-to-r ${getGradient()} transition-all ease-out shadow-[0_0_12px_rgba(34,197,94,0.3)]`}
+          style={{ width: `${percentage}%`, transitionDuration: `${scaleSeconds(0.5, speed)}s` }}
         />
       </div>
     </div>

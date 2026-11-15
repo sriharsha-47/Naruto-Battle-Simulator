@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DamagePopupEvent } from '../../types/battle';
+import { useSettingsStore } from '../../store/useSettingsStore';
+import { scaleSeconds } from '../../utils/battleSpeed';
 
 interface DamagePopupProps {
   popups: DamagePopupEvent[];
@@ -13,6 +15,7 @@ export const DamagePopup: React.FC<DamagePopupProps> = ({
   onComplete,
   targetSide,
 }) => {
+  const speed = useSettingsStore((s) => s.battleSpeed);
   const filtered = popups.filter((p) => p.target === targetSide);
 
   return (
@@ -24,7 +27,7 @@ export const DamagePopup: React.FC<DamagePopupProps> = ({
             initial={{ opacity: 0, y: 10, scale: 0.7 }}
             animate={{ opacity: 1, y: -65, scale: item.type === 'critical' ? 1.4 : 1.1 }}
             exit={{ opacity: 0, y: -90, scale: 0.8 }}
-            transition={{ duration: 0.85, ease: 'easeOut' }}
+            transition={{ duration: scaleSeconds(0.85, speed), ease: 'easeOut' }}
             onAnimationComplete={() => onComplete(item.id)}
             className="absolute flex flex-col items-center select-none"
           >

@@ -1,7 +1,10 @@
 from typing import Optional, Union
 from backend.ai.alphabeta import AlphaBetaAI
 from backend.ai.base import BaseAI
+from backend.ai.evolutionary import EvolutionaryAI
+from backend.ai.expectimax import ExpectimaxAI
 from backend.ai.heuristic import HeuristicAI, HeuristicWeights
+from backend.ai.mcts import MCTSAI
 from backend.ai.minimax import MinimaxAI
 from backend.ai.random_ai import RandomAI
 from backend.ai.rule_based import RuleBasedAI
@@ -35,5 +38,11 @@ class AIFactory:
             return MinimaxAI(name=name or "Minimax AI", max_depth=max_depth, weights=weights)
         elif strategy == AIStrategy.ALPHA_BETA:
             return AlphaBetaAI(name=name or "Alpha-Beta AI", max_depth=max_depth, weights=weights)
+        elif strategy == AIStrategy.EXPECTIMAX:
+            return ExpectimaxAI(name=name or "Expectimax AI", max_depth=max_depth, weights=weights)
+        elif strategy == AIStrategy.MCTS:
+            return MCTSAI(name=name or "MCTS AI", weights=weights)
+        elif strategy == AIStrategy.EVOLUTIONARY:
+            return EvolutionaryAI(name=name or "Evolutionary AI", weights=weights)
         else:
             raise ValueError(f"Unsupported strategy: {strategy}")

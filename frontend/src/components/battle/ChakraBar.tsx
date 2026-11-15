@@ -1,5 +1,7 @@
 import React from 'react';
 import { Zap } from 'lucide-react';
+import { useSettingsStore } from '../../store/useSettingsStore';
+import { scaleSeconds } from '../../utils/battleSpeed';
 
 interface ChakraBarProps {
   currentChakra: number;
@@ -14,6 +16,7 @@ export const ChakraBar: React.FC<ChakraBarProps> = ({
   isFlipped = false,
   unlimited = false,
 }) => {
+  const speed = useSettingsStore((s) => s.battleSpeed);
   const percentage = unlimited ? 100 : Math.max(0, Math.min(100, (currentChakra / maxChakra) * 100));
 
   return (
@@ -34,8 +37,8 @@ export const ChakraBar: React.FC<ChakraBarProps> = ({
 
       <div className="relative h-2.5 w-full rounded-full bg-ninja-border/90 p-[1.5px] shadow-inner overflow-hidden border border-ninja-border">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-chakra-deep via-chakra-blue to-cyan-300 transition-all duration-400 ease-out shadow-[0_0_10px_rgba(0,191,255,0.6)]"
-          style={{ width: `${percentage}%` }}
+          className="h-full rounded-full bg-gradient-to-r from-chakra-deep via-chakra-blue to-cyan-300 transition-all ease-out shadow-[0_0_10px_rgba(0,191,255,0.6)]"
+          style={{ width: `${percentage}%`, transitionDuration: `${scaleSeconds(0.4, speed)}s` }}
         />
       </div>
     </div>

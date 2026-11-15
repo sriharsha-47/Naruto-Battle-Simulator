@@ -40,6 +40,9 @@ class AIStrategy(str, Enum):
     HEURISTIC = "heuristic"
     MINIMAX = "minimax"
     ALPHA_BETA = "alpha_beta"
+    EXPECTIMAX = "expectimax"
+    MCTS = "mcts"
+    EVOLUTIONARY = "evolutionary"
 
 
 class BattleStatus(str, Enum):

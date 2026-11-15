@@ -26,10 +26,21 @@ export const ActionPanel: React.FC<ActionPanelProps> = ({
     ? [...currentFighter.character.abilities, MEDITATE_ABILITY]
     : currentFighter.character.abilities;
 
+  // Once the match is over (or when reviewing a finished match) the deck is no longer needed:
+  // it stays at the bottom of the page, but is invisible and not pinned to the screen.
+  const isFinished = battle.status !== 'ongoing';
+
   return (
-    <div className="rounded-2xl border border-ninja-border/80 bg-ninja-surface/95 p-4 shadow-xl backdrop-blur-md">
+    <div
+      className={`rounded-2xl border border-ninja-border/80 bg-ninja-surface p-4 backdrop-blur-md ${
+        isFinished
+          ? 'invisible pointer-events-none'
+          : 'sticky bottom-0 z-30 shadow-[0_-12px_32px_rgba(0,0,0,0.6)]'
+      }`}
+      aria-hidden={isFinished}
+    >
       {/* Panel Top Status */}
-      <div className="flex items-center justify-between border-b border-ninja-border/60 pb-3 mb-3">
+      <div className="flex min-h-[2rem] items-center justify-between border-b border-ninja-border/60 pb-3 mb-3">
         <div className="flex items-center gap-2">
           <Swords className="h-4 w-4 text-flame-orange" />
           <span className="text-xs font-bold uppercase tracking-wider text-white">
@@ -62,20 +73,16 @@ export const ActionPanel: React.FC<ActionPanelProps> = ({
         )}
       </div>
 
-      {/* Main Jutsu Buttons Grid or AI Thinking State */}
-      {isAIMove && isAIThinking ? (
-        <div className="flex h-36 flex-col items-center justify-center gap-3 rounded-xl border border-ninja-border/50 bg-ninja-panel/60">
-          <LoadingSpinner size="md" variant="sharingan" text="Analyzing Game Tree & Tactical Minimax Horizons..." />
-        </div>
-      ) : (
-        <>
+      {/* Main Jutsu Buttons Grid (fixed-size cards so the deck never changes height).
+          The AI-thinking spinner is overlaid instead of swapped in, so nothing jumps. */}
+      <div className="relative">
         {needsMeditate && !isAIMove && (
           <div className="mb-3 flex items-center gap-2 rounded-lg border border-chakra-blue/40 bg-chakra-blue/10 px-3 py-2 text-xs font-mono text-chakra-blue">
             <Zap className="h-4 w-4 shrink-0" />
             Chakra depleted — no jutsu can be cast right now. Meditate to recover chakra.
           </div>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 [&>button]:h-44 [&>button]:overflow-hidden">
           {abilities.map((ability) => {
             const cd = currentFighter.cooldowns[ability.id] || 0;
             return (
@@ -92,8 +99,12 @@ export const ActionPanel: React.FC<ActionPanelProps> = ({
             );
           })}
         </div>
-        </>
-      )}
+        {isAIMove && isAIThinking && (
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 rounded-xl border border-ninja-border/50 bg-ninja-panel/90">
+            <LoadingSpinner size="md" variant="sharingan" text="Analyzing Game Tree & Tactical Minimax Horizons..." />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

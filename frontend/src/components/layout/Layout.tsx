@@ -17,7 +17,7 @@ export const Layout: React.FC = () => {
   }
 
   return (
-    <div className="relative flex min-h-screen bg-ninja-bg text-gray-100 antialiased overflow-hidden">
+    <div className="relative flex h-screen bg-ninja-bg text-gray-100 antialiased overflow-hidden">
       {/* Background ambient particles */}
       <ParticlesBackground particleCount={30} opacity={0.3} particleColor="orange" />
 
@@ -25,7 +25,7 @@ export const Layout: React.FC = () => {
       <Sidebar />
 
       {/* Main content column */}
-      <div className="relative flex flex-1 flex-col overflow-y-auto">
+      <div className="relative flex min-h-0 flex-1 flex-col overflow-y-auto">
         <Header />
         <main className="flex-1 p-6 md:p-8">
           <Outlet />

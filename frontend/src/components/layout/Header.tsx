@@ -16,7 +16,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between border-b border-ninja-border/70 bg-ninja-surface/80 px-6 backdrop-blur-md">
+    <header className="sticky top-0 z-30 flex h-16 w-full shrink-0 items-center justify-between border-b border-ninja-border/70 bg-ninja-surface/80 px-6 backdrop-blur-md">
       {/* Left status badge */}
       <div className="flex items-center gap-3">
         {battle && battle.status === 'ongoing' ? (

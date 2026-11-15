@@ -2,11 +2,14 @@ export type AIStrategy =
   | 'random' 
   | 'greedy' 
   | 'minimax' 
-  | 'alpha_beta';
+  | 'alpha_beta'
+  | 'expectimax'
+  | 'mcts'
+  | 'evolutionary';
 
 // The only algorithms this project exposes. Anything else that shows up
 // (old localStorage data, an API response) is mapped back to a valid one.
-export const ALLOWED_STRATEGIES: AIStrategy[] = ['random', 'greedy', 'minimax', 'alpha_beta'];
+export const ALLOWED_STRATEGIES: AIStrategy[] = ['random', 'greedy', 'minimax', 'alpha_beta', 'expectimax', 'mcts', 'evolutionary'];
 
 export function isAllowedStrategy(value: unknown): value is AIStrategy {
   return ALLOWED_STRATEGIES.includes(value as AIStrategy);

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { scaleDelay } from '../utils/battleSpeed';
 import { TournamentState, TournamentMatch, TournamentContender } from '../types/tournament';
 import { CHARACTERS } from '../api/mockData';
 import { AIStrategy, ALLOWED_STRATEGIES } from '../types/ai';
@@ -25,6 +26,9 @@ interface TournamentStore {
 
 const STRATEGY_WEIGHTS: Record<AIStrategy, number> = {
   alpha_beta: 75,
+  mcts: 74,
+  expectimax: 72,
+  evolutionary: 68,
   minimax: 70,
   greedy: 50,
   random: 20,
@@ -122,7 +126,7 @@ export const useTournamentStore = create<TournamentStore>((set, get) => ({
     set({ activeMatch: match, isRunning: true });
 
     // Realistic match resolution weighted by AI strategy strength
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    await new Promise((resolve) => setTimeout(resolve, scaleDelay(600)));
 
     const w1 = STRATEGY_WEIGHTS[match.contender1.strategy] || 50;
     const w2 = STRATEGY_WEIGHTS[match.contender2.strategy] || 50;
@@ -224,7 +228,7 @@ export const useTournamentStore = create<TournamentStore>((set, get) => ({
       if (!pendingMatch) break;
 
       await get().simulateMatch(pendingMatch.id);
-      await new Promise((r) => setTimeout(r, 200));
+      await new Promise((r) => setTimeout(r, scaleDelay(200)));
     }
 
     set({ isRunning: false });

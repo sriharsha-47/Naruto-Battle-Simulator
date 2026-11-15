@@ -9,9 +9,15 @@ interface BattleLogProps {
 export const BattleLog: React.FC<BattleLogProps> = ({ logs }) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
+  // The battle store keeps the newest entry first; show them chronologically so the
+  // most recent move sits at the BOTTOM of the scroll.
+  const orderedLogs = [...logs].reverse();
+
+  // Keep the newest entry in view automatically
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = 0;
+    const el = scrollRef.current;
+    if (el) {
+      el.scrollTop = el.scrollHeight;
     }
   }, [logs]);
 
@@ -53,7 +59,7 @@ export const BattleLog: React.FC<BattleLogProps> = ({ logs }) => {
             Waiting for combat engagement...
           </div>
         ) : (
-          logs.map((log) => (
+          orderedLogs.map((log) => (
             <div
               key={log.id}
               className={`flex items-start gap-2.5 rounded-lg border p-2 transition-all ${

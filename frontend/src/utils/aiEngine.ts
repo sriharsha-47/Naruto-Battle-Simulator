@@ -1,6 +1,7 @@
 import { BattleState, BattleFighter, BattleLogEntry, DamagePopupEvent } from '../types/battle';
 import { Character, Ability } from '../types/character';
 import { AIStrategy, AIDecision, AIAlternative, GameTreeNode, sanitizeStrategy } from '../types/ai';
+import { isAdvancedStrategy, computeAdvancedDecision } from './advancedAI';
 
 // ---------------------------------------------------------------------------
 // Chakra rules
@@ -75,6 +76,11 @@ export function computeAIDecision(
   searchDepth: number = 3
 ): AIDecision {
   strategy = sanitizeStrategy(strategy, 'minimax'); // stale/unsupported values fall back to Minimax
+
+  // Expectimax / MCTS / Evolutionary use their own look-ahead engine (see advancedAI.ts)
+  if (isAdvancedStrategy(strategy)) {
+    return computeAdvancedDecision(battle, actingPlayerKey, strategy, searchDepth);
+  }
   const actor = actingPlayerKey === 'player1' ? battle.player1 : battle.player2;
   const opponent = actingPlayerKey === 'player1' ? battle.player2 : battle.player1;
 
